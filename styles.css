@@ -1,0 +1,84 @@
+:root {
+  --black: #050706;
+  --screen: #0b100d;
+  --green: #b6ffb8;
+  --dim-green: #619568;
+  --line: #29412e;
+  --amber: #e3c875;
+  --mono: "Cascadia Mono", "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--black); }
+body {
+  margin: 0;
+  min-width: 320px;
+  color: var(--green);
+  background: var(--black);
+  font: 14px/1.55 var(--mono);
+  text-shadow: 0 0 7px rgba(182, 255, 184, .15);
+}
+a { color: inherit; }
+.shell { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 0 18px;
+  border-bottom: 1px solid var(--line);
+}
+.brand { font-weight: 700; }
+.brand span { color: var(--amber); }
+.status { color: var(--dim-green); }
+.status strong { color: var(--green); font-weight: 400; }
+main { padding: 54px 0 72px; }
+.intro { max-width: 680px; margin-bottom: 46px; }
+.eyebrow, .section-label, .game-index { color: var(--dim-green); font-size: 12px; }
+.eyebrow { margin: 0 0 14px; }
+h1, h2 { margin: 0; color: var(--green); font-weight: 400; letter-spacing: 0; }
+h1 { font-size: clamp(2rem, 6vw, 4.5rem); line-height: 1.05; }
+.intro p:last-child { max-width: 620px; margin: 20px 0 0; color: var(--dim-green); }
+.section-label { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.section-label::after { content: ""; height: 1px; flex: 1; background: var(--line); }
+.game-card { border: 1px solid var(--line); background: var(--screen); }
+.game-info { padding: clamp(22px, 4vw, 42px); }
+h2 { margin: 20px 0 10px; font-size: clamp(1.8rem, 4vw, 3.2rem); }
+.description { max-width: 620px; margin: 0; color: var(--dim-green); }
+.meta { display: flex; flex-wrap: wrap; gap: 24px; margin: 26px 0; color: var(--dim-green); font-size: 11px; }
+.meta b { display: block; margin-top: 2px; color: var(--green); font-weight: 400; }
+.actions { display: flex; flex-wrap: wrap; gap: 9px; }
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 7px 13px;
+  border: 1px solid var(--green);
+  color: var(--black);
+  background: var(--green);
+  font: 700 11px var(--mono);
+  text-decoration: none;
+  cursor: pointer;
+  text-shadow: none;
+}
+.button:hover, .button:focus-visible { color: var(--black); background: #e0ffe0; }
+.button.secondary { border-color: var(--line); color: var(--green); background: transparent; }
+.button.secondary:hover, .button.secondary:focus-visible { border-color: var(--green); color: var(--green); background: #101a12; }
+.game-stage { width: 100%; aspect-ratio: 4 / 3; border-top: 1px solid var(--line); background: #000; }
+.stage-body { position: relative; width: 100%; height: 100%; }
+.game-frame { display: block; width: 100%; height: 100%; border: 0; background: #000; }
+.launch-panel { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(5, 7, 6, .9); }
+.launch-panel.is-hidden { display: none; }
+.launch-button { min-width: 210px; }
+.stage-controls { position: absolute; right: 10px; bottom: 10px; display: flex; gap: 6px; }
+.icon-button { min-width: 36px; padding: 6px 9px; }
+.icon-button[aria-pressed="true"] { color: var(--black); background: var(--amber); border-color: var(--amber); }
+footer { display: flex; justify-content: space-between; gap: 20px; padding: 20px 0; border-top: 1px solid var(--line); color: var(--dim-green); font-size: 11px; }
+footer strong { color: var(--green); font-weight: 400; }
+@media (max-width: 620px) {
+  .shell { width: min(100% - 24px, 560px); }
+  .site-header { padding-top: 16px; }
+  .status { display: none; }
+  main { padding-top: 36px; }
+  footer { flex-direction: column; gap: 4px; }
+}

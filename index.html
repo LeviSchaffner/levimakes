@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>./arcade</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="site-header">
+      <div class="brand">./arcade<span>$</span></div>
+    </header>
+
+    <main>
+      <section aria-labelledby="games-heading">
+        <div class="section-label" id="games-heading">$ ls ./games</div>
+        <article class="game-card">
+          <div class="game-info">
+            <h2 id="game-title">Russian Roulette</h2>
+            <p class="description" id="game-description">My first game made in godot a super simple proof of concept game made by me and my friend Waffly. Pull the trigger and take a change.</p>
+            <div class="meta">
+              <div><b id="game-date">2026-08-24</b></div>
+            </div>
+            <div class="actions">
+              <a class="button secondary" id="download-game" href="#" download>[ download windows ]</a>
+            </div>
+          </div>
+          <div class="game-stage" id="game-stage">
+            <div class="stage-body">
+              <iframe class="game-frame" id="game-frame" src="about:blank" title="Game web build" allow="fullscreen; autoplay"></iframe>
+              <div class="launch-panel" id="launch-panel">
+                <button class="button launch-button" id="launch-game" type="button">[ launch web build ]</button>
+              </div>
+              <div class="stage-controls" aria-label="Game controls">
+                <button class="button secondary icon-button" id="mute-game" type="button" aria-pressed="false" title="Mute game audio">[ mute ]</button>
+                <button class="button secondary icon-button" id="fullscreen-game" type="button" title="Fullscreen game">[ full ]</button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+  </div>
+
+  <script>
+    // Add future releases as objects here. The first object becomes the featured game.
+    const games = [{
+      title: 'Russian Roulette',
+      description: 'A compact game of chance. Take your turn, trust the odds, and see what happens.',
+      date: '2026-08-24',
+      platform: 'WEB + WINDOWS',
+      version: 'v1.0.0',
+      web: 'RussianRoulette/RussianRoulette.html',
+      windows: 'RussianRoulette/RussianRoulette_Win.zip'
+    }];
+
+    const game = games[0];
+    document.querySelector('#game-title').textContent = game.title;
+    document.querySelector('#game-description').textContent = game.description;
+    document.querySelector('#game-date').textContent = game.date;
+    document.querySelector('#download-game').href = game.windows;
+    document.querySelector('#game-frame').title = `${game.title} web game`;
+
+    const frame = document.querySelector('#game-frame');
+    const stage = document.querySelector('#game-stage');
+    const launchPanel = document.querySelector('#launch-panel');
+    const launch = document.querySelector('#launch-game');
+    const mute = document.querySelector('#mute-game');
+    const fullscreen = document.querySelector('#fullscreen-game');
+
+    launch.addEventListener('click', () => {
+      frame.src = game.web;
+      launchPanel.classList.add('is-hidden');
+      launch.textContent = '[ restart web build ]';
+    });
+    launch.addEventListener('dblclick', () => {
+      frame.src = game.web;
+    });
+    mute.addEventListener('click', () => {
+      const muted = mute.getAttribute('aria-pressed') === 'true';
+      mute.setAttribute('aria-pressed', String(!muted));
+      mute.textContent = muted ? '[ mute ]' : '[ muted ]';
+      frame.contentWindow?.postMessage({ type: 'arcade-audio', muted: !muted }, '*');
+    });
+    fullscreen.addEventListener('click', () => {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        stage.requestFullscreen?.();
+      }
+    });
+  </script>
+</body>
+</html>
